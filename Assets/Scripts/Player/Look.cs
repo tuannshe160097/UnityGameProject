@@ -5,10 +5,13 @@ using UnityEngine.InputSystem;
 
 public class Look : MonoBehaviour
 {
+    private CinemachineSwitcher _switcher;
+    [SerializeField]
+    private GameObject _cinemachineManager;
     // Start is called before the first frame update
     void Start()
     {
-        
+        _switcher = _cinemachineManager.GetComponent<CinemachineSwitcher>();
     }
 
     // Update is called once per frame
@@ -21,11 +24,11 @@ public class Look : MonoBehaviour
 
         if (context.performed)
         {
-
+            _switcher.SwitchUpCameraPriority();
         }
         if (context.canceled)
         {
-
+            _switcher.SwitchMainCameraPriority();
         }
     }
 
@@ -34,11 +37,11 @@ public class Look : MonoBehaviour
 
         if (context.performed)
         {
-
+            _switcher.SwitchDownCameraPriority();
         }
         if (context.canceled)
         {
-
+            _switcher.SwitchMainCameraPriority();
         }
     }
 }

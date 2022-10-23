@@ -22,7 +22,7 @@ public class WallClimb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_utility.IsGrounded() && _utility.IsWall() && _rb.velocity.y < 0)     
+        if (_rb.velocity.y < 0 && !_utility.IsGrounded() && _utility.IsWall())
         {
             _rb.drag = WallDrag;
         }

@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Look : MonoBehaviour
 {
-    private CinemachineSwitcher _switcher;
+    [HideInInspector]
+    public CinemachineSwitcher _switcher;
     [SerializeField]
     private GameObject _cinemachineManager;
     // Start is called before the first frame update

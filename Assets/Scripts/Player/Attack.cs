@@ -8,6 +8,8 @@ public class Attack : MonoBehaviour
     private Utility _utility;
     private Rigidbody2D _rb;
 
+    private Look _lookAction;
+
     [SerializeField]
     private Subject _onPlayerAttack;
     [SerializeField]
@@ -20,6 +22,7 @@ public class Attack : MonoBehaviour
         _utility = GetComponent<Utility>();
         _rb = GetComponent<Rigidbody2D>();
         _animator = _weapon.GetComponent<Animator>();
+        _lookAction = GetComponent<Look>();
     }
 
     // Update is called once per frame
@@ -33,6 +36,7 @@ public class Attack : MonoBehaviour
         if (context.started)
         {
             _onPlayerAttack.Trigger();
+            _lookAction._switcher.SwitchMainCameraPriority();
             _animator.SetTrigger("Swing");
         }
     }
@@ -41,6 +45,7 @@ public class Attack : MonoBehaviour
         if (context.started)
         {
             _onPlayerAttack.Trigger();
+            _lookAction._switcher.SwitchMainCameraPriority();
             _animator.SetTrigger("SwingUp");
         }
     }
@@ -49,6 +54,7 @@ public class Attack : MonoBehaviour
         if (context.started && !_utility.IsGrounded())
         {
             _onPlayerAttack.Trigger();
+            _lookAction._switcher.SwitchMainCameraPriority();
             _animator.SetTrigger("SwingDown");
         }
     }

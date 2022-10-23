@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     public float Speed;
     private Utility _utility;
     private Rigidbody2D _rb;
+    private Look _lookAction;
 
     [SerializeField]
     private Subject _onPlayerMove;
@@ -17,6 +18,7 @@ public class Movement : MonoBehaviour
     {
         _utility = GetComponent<Utility>();
         _rb = GetComponent<Rigidbody2D>();
+        _lookAction = GetComponent<Look>();
     }
 
     // Update is called once per frame
@@ -35,10 +37,12 @@ public class Movement : MonoBehaviour
         if (context.started)
         {
             _onPlayerMove.Trigger();
+            _lookAction._switcher.SwitchMainCameraPriority();
         }
 
         if (context.canceled)
         {
+            _utility.CanLook = true;
             StopMovement();
         }
     }

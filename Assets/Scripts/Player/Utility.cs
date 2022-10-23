@@ -16,6 +16,9 @@ public class Utility : MonoBehaviour
     [HideInInspector]
     public bool CanAttack;
 
+    [HideInInspector]
+    public bool CanLook;
+
     [SerializeField]
     private LayerMask _groundLayer;
 
@@ -33,6 +36,7 @@ public class Utility : MonoBehaviour
         IsFacingRight = true;
         CanMove = true;
         CanAttack = true;
+        CanLook = true;
     }
 
     // Update is called once per frame

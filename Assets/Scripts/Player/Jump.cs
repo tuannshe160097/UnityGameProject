@@ -10,6 +10,8 @@ public class Jump : MonoBehaviour
 
     private int _jumpCounter;
 
+    private Look _lookAction;
+
     private Utility _utility;
     private Rigidbody2D _rb;
 
@@ -22,6 +24,8 @@ public class Jump : MonoBehaviour
         _utility = GetComponent<Utility>();
         _rb = GetComponent<Rigidbody2D>();
         _jumpCounter = MaxJumpCounter;
+
+        _lookAction = GetComponent<Look>();
     }
 
     // Update is called once per frame
@@ -40,6 +44,7 @@ public class Jump : MonoBehaviour
             if (_utility.IsGrounded())
             {
                 _rb.velocity = new Vector2(_rb.velocity.x, JumpPower);
+                _lookAction._switcher.SwitchMainCameraPriority();
             }
             else if (_jumpCounter > 0 && !_utility.IsWall())
             {

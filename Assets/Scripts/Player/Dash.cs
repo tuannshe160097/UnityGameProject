@@ -11,6 +11,8 @@ public class Dash : MonoBehaviour
 
     private int _dashCounter;
 
+    private Look _lookAction;
+
     private Utility _utility;
     private Rigidbody2D _rb;
 
@@ -23,6 +25,8 @@ public class Dash : MonoBehaviour
         _utility = GetComponent<Utility>();
         _rb = GetComponent<Rigidbody2D>();
         _dashCounter = MaxDashCounter;
+
+        _lookAction = GetComponent<Look>();
     }
 
     // Update is called once per frame
@@ -39,6 +43,8 @@ public class Dash : MonoBehaviour
 
         if (context.started && _utility.CanMove && _dashCounter > 0)
         {
+            _lookAction._switcher.SwitchMainCameraPriority();
+
             _utility.CanMove = false;
             _utility.CanAttack = false;
             _dashCounter--;

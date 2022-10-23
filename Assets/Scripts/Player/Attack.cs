@@ -10,12 +10,16 @@ public class Attack : MonoBehaviour
 
     [SerializeField]
     private Subject _onPlayerAttack;
+    [SerializeField]
+    private GameObject _weapon;
+    private Animator _animator;
 
     // Start is called before the first frame update
     void Start()
     {
         _utility = GetComponent<Utility>();
         _rb = GetComponent<Rigidbody2D>();
+        _animator = _weapon.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -29,22 +33,23 @@ public class Attack : MonoBehaviour
         if (context.started)
         {
             _onPlayerAttack.Trigger();
+            _animator.SetTrigger("Swing");
         }
-
     }
-
     public void AttackUpInput(InputAction.CallbackContext context)
     {
         if (context.started)
         {
             _onPlayerAttack.Trigger();
+            _animator.SetTrigger("SwingUp");
         }
     }
     public void AttackDownInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !_utility.IsGrounded())
         {
             _onPlayerAttack.Trigger();
+            _animator.SetTrigger("SwingDown");
         }
     }
 }

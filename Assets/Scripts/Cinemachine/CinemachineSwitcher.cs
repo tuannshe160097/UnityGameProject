@@ -5,29 +5,29 @@ using Cinemachine;
 
 public class CinemachineSwitcher : MonoBehaviour
 {
-    [SerializeField]
-    private CinemachineVirtualCamera _virtualMainCamera;
-    [SerializeField]
-    private CinemachineVirtualCamera _virtualUpCamera;
-    [SerializeField]
-    private CinemachineVirtualCamera _virtualDownCamera;
+    private CinemachineUtility _utility;
+
+    void Start()
+    {
+        _utility = GetComponent<CinemachineUtility>();
+    }
 
     public void SwitchUpCameraPriority()
     {
-        _virtualMainCamera.Priority = 0;
-        _virtualUpCamera.Priority = 10;
-        _virtualDownCamera.Priority = 0;
+        _utility.VirtualMainCamera.Priority = 0;
+        _utility.VirtualUpCamera.Priority = 10;
+        _utility.VirtualDownCamera.Priority = 0;
     }
     public void SwitchDownCameraPriority()
     {
-        _virtualMainCamera.Priority = 0;
-        _virtualUpCamera.Priority = 0;
-        _virtualDownCamera.Priority = 10;
+        _utility.VirtualMainCamera.Priority = 0;
+        _utility.VirtualUpCamera.Priority = 0;
+        _utility.VirtualDownCamera.Priority = 10;
     }
     public void SwitchMainCameraPriority()
     {
-        _virtualMainCamera.Priority = 10;
-        _virtualUpCamera.Priority = 0;
-        _virtualDownCamera.Priority = 0;
+        _utility.VirtualMainCamera.Priority = 10;
+        _utility.VirtualUpCamera.Priority = 0;
+        _utility.VirtualDownCamera.Priority = 0;
     }
 }

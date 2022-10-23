@@ -146,6 +146,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: temp_sprite_2
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 430
+        width: 6
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1807fd8e26becad4c9066d46a06b8669
+      internalID: 2122725689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -157,6 +178,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      temp_sprite_2: 2122725689
       temp_sprite_1: 955532239
       temp_sprite_0: -391062111
   spritePackingTag: 

@@ -11,7 +11,7 @@ public class Gate : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            PlayerManager.ChangeScene(Scene, Coordinate);
+            ChangeSceneManager.ChangeScene(Scene, Coordinate);
         }
     }
 }

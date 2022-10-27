@@ -47,4 +47,10 @@ public class Movement : MonoBehaviour
     {
         _rb.velocity = new Vector2(0, _rb.velocity.y);
     }
+
+    public void Save(object param)
+    {
+        Dictionary<string, object> saveData = (Dictionary<string, object>)param;
+        saveData.Add("MoveSpeed", Speed);
+    }
 }

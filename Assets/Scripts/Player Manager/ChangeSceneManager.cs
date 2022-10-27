@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class ChangeSceneManager : MonoBehaviour
 {
-    [SerializeField]
-    private string Scene;
-    [SerializeField]
-    private Vector3 Coordinate;
-
     private static string _scene;
     private static Vector3 _coordinate;
 
@@ -19,17 +15,15 @@ public class ChangeSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _scene = Scene;
-        _coordinate = Coordinate;
-
-        ChangeScene(Scene, Coordinate);
+        SaveManager.Load();
+        ChangeScene(_scene, _coordinate);
         SceneManager.sceneLoaded += RepositionPlayer;
     }
 
-    public static void ChangeScene(string Scene, Vector3 Coordinate)
+    public static void ChangeScene(string scene, Vector3 coordinate)
     {
-        _scene = Scene;
-        _coordinate = Coordinate;
+        _scene = scene;
+        _coordinate = coordinate;
 
         SceneManager.LoadScene(_scene);
     }
@@ -37,5 +31,12 @@ public class ChangeSceneManager : MonoBehaviour
     private void RepositionPlayer(Scene scene, LoadSceneMode mode)
     {
         _player.transform.position = _coordinate;
+    }
+
+    public void Load(object param)
+    {
+        Dictionary<string, object> loadData = (Dictionary<string, object>)param;
+        _scene = (string)loadData["Scene"];
+        _coordinate = ((Vector3Json)loadData["Position"]).ToVector3();
     }
 }

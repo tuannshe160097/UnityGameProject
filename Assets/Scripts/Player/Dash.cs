@@ -58,4 +58,11 @@ public class Dash : MonoBehaviour
         _utility.CanMove = true;
         _utility.CanAttack = true;
     }
+
+    public void Save(object param)
+    {
+        Dictionary<string, object> saveData = (Dictionary<string, object>)param;
+        saveData.Add("DashMax", MaxDashCounter);
+        saveData.Add("DashPower", DashSpeed);
+    }
 }

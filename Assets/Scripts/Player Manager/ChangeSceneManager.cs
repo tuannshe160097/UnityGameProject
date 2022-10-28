@@ -15,7 +15,7 @@ public class ChangeSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SaveManager.Load();
+        FindObjectOfType<PlayerSave>().Load();
         ChangeScene(_scene, _coordinate);
         SceneManager.sceneLoaded += RepositionPlayer;
     }

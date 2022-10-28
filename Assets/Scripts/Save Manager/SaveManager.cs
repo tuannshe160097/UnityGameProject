@@ -4,26 +4,16 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class SaveManager : MonoBehaviour
+public abstract class SaveManager : MonoBehaviour
 {
-    private static SubjectOneParam _onSave;
-    private static SubjectOneParam _onLoad;
-    private static string _saveFilePath;
-
-    public SubjectOneParam OnSave;
-    public SubjectOneParam OnLoad;
-
-    public void Start()
-    {
-        _onSave = OnSave;
-        _onLoad = OnLoad;
-        _saveFilePath = Application.persistentDataPath + "/Save/save1.json";
-    }
+    private SubjectOneParam OnSave;
+    private SubjectOneParam OnLoad;
+    private string SaveFilePath;
 
     public static void Save()
     {
         Dictionary<string, object> saveData = new Dictionary<string, object>();
-        _onSave.Trigger(saveData);
+        OnSave.Trigger(saveData);
         ToFile(saveData);
     }
 
@@ -32,7 +22,7 @@ public class SaveManager : MonoBehaviour
         string json = JsonConvert.SerializeObject(saveData, new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.All,
-        });
+        }); 
         new FileInfo(_saveFilePath).Directory.Create();
         File.WriteAllText(_saveFilePath, json);
     }
@@ -40,7 +30,7 @@ public class SaveManager : MonoBehaviour
     public static void Load()
     {
         Dictionary<string, object> loadData = FromFile();
-        _onLoad.Trigger(loadData);
+        OnLoad.Trigger(loadData);
     }
 
     private static Dictionary<string, object> FromFile()

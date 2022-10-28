@@ -8,7 +8,7 @@ public class SavePointInteract : InteractableObject
     public override void Interact()
     {
         GetComponent<ObserverOneParam>().enabled = true;
-        SaveManager.Save();
+        GameObject.FindObjectOfType<PlayerSave>().Save();
         GetComponent<ObserverOneParam>().enabled = false;
     }
 }

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - CameraBoundary
+  - InteractableObject
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Player
   - PlayerWeapon
   - CameraBoundary
-  - 
+  - InteractableObject
   - 
   - 
   - 
@@ -41,4 +42,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1570318741
+    locked: 0
+  - name: Ground
+    uniqueID: 3639328151
+    locked: 0
+  - name: Foreground
+    uniqueID: 2151895449
     locked: 0

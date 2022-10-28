@@ -4,27 +4,32 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class PlayerSave : SaveManager
+namespace Script.SaveManager
 {
-    protected override string SaveFilePath => Application.persistentDataPath + "/" + SaveSlot + "/player.json";
 
-    private Dictionary<string, object> DefaultData;
-
-    private void Start()
+    public class PlayerSave : SaveManager
     {
-        DefaultData = new Dictionary<string, object>();
-        DefaultData.Add("Scene", "Demo 1");
-        DefaultData.Add("Position", new Vector3Json(-8, -0.3f, 0));
-    }
+        protected override string SaveFilePath => Application.persistentDataPath + "/" + SaveSlot + "/player.json";
 
-    public void CreateSave(string saveSlot)
-    {
-        ChangeSaveSlot(saveSlot);
+        private Dictionary<string, object> DefaultData;
 
-        if (!File.Exists(SaveFilePath))
+        private void Start()
         {
-            new FileInfo(SaveFilePath).Directory.Create();
-            ToFile(DefaultData);
+            DefaultData = new Dictionary<string, object>();
+            DefaultData.Add("Scene", "Demo 1");
+            DefaultData.Add("Position", new Vector3Json(-8, -0.3f, 0));
+        }
+
+        public void CreateSave(string saveSlot)
+        {
+            ChangeSaveSlot(saveSlot);
+
+            if (!File.Exists(SaveFilePath))
+            {
+                new FileInfo(SaveFilePath).Directory.Create();
+                ToFile(DefaultData);
+            }
         }
     }
+
 }

@@ -2,49 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Script.ObserverPattern;
 
-public class Movement : MonoBehaviour
+namespace Script.Player
 {
-    public float Speed;
-    private Utility _utility;
-    private Rigidbody2D _rb;
-
-    [SerializeField]
-    private Subject _onPlayerMove;
-
-    // Start is called before the first frame update
-    void Start()
+    public class Movement : MonoBehaviour
     {
-        _utility = GetComponent<Utility>();
-        _rb = GetComponent<Rigidbody2D>();
-    }
+        public float Speed;
+        private Utility _utility;
+        private Rigidbody2D _rb;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (_utility.MoveDirection != 0 && _utility.CanMove)
+        [SerializeField]
+        private Subject _onPlayerMove;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            _rb.velocity = new Vector2(_utility.MoveDirection * Speed, _rb.velocity.y);
-        }
-    }
-
-    public void MoveInput(InputAction.CallbackContext context)
-    {
-        _utility.MoveDirection = context.ReadValue<float>();
-
-        if (context.started)
-        {
-            _onPlayerMove.Trigger();
+            _utility = GetComponent<Utility>();
+            _rb = GetComponent<Rigidbody2D>();
         }
 
-        if (context.canceled)
+        // Update is called once per frame
+        void Update()
         {
-            StopMovement();
+            if (_utility.MoveDirection != 0 && _utility.CanMove)
+            {
+                _rb.velocity = new Vector2(_utility.MoveDirection * Speed, _rb.velocity.y);
+            }
         }
-    }
 
-    public void StopMovement()
-    {
-        _rb.velocity = new Vector2(0, _rb.velocity.y);
+        public void MoveInput(InputAction.CallbackContext context)
+        {
+            _utility.MoveDirection = context.ReadValue<float>();
+
+            if (context.started)
+            {
+                _onPlayerMove.Trigger();
+            }
+
+            if (context.canceled)
+            {
+                StopMovement();
+            }
+        }
+
+        public void StopMovement()
+        {
+            _rb.velocity = new Vector2(0, _rb.velocity.y);
+        }
     }
 }

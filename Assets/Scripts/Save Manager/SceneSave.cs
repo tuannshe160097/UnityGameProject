@@ -1,25 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
-public class SceneSave : SaveManager
+namespace Script.SaveManager
 {
-    protected override string SaveFilePath => Application.persistentDataPath + "/" + SaveSlot + "/" + SceneManager.GetActiveScene().name + ".json";
-
-    private void Start()
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.IO;
+    using UnityEngine;
+    using UnityEngine.SceneManagement;
+    public class SceneSave : SaveManager
     {
-        SceneManager.sceneLoaded += SceneChangeLoadData;
-    }
+        protected override string SaveFilePath => Application.persistentDataPath + "/" + SaveSlot + "/" + SceneManager.GetActiveScene().name + ".json";
 
-    private void SceneChangeLoadData(Scene scene, LoadSceneMode mode)
-    {
-        if (!File.Exists(SaveFilePath))
+        private void Start()
         {
-            ToFile(new Dictionary<string, object>());
+            SceneManager.sceneLoaded += SceneChangeLoadData;
         }
 
-        Load();
+        private void SceneChangeLoadData(Scene scene, LoadSceneMode mode)
+        {
+            if (!File.Exists(SaveFilePath))
+            {
+                ToFile(new Dictionary<string, object>());
+            }
+
+            Load();
+        }
     }
+
 }

@@ -1,17 +1,24 @@
+using Script.SceneManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gate : MonoBehaviour
-{
-    public string Scene;
-    public Vector3 Coordinate;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+namespace Script.Environment
+{
+
+    public class Gate : MonoBehaviour
     {
-        if (collision.gameObject.tag == "Player")
+        public string Scene;
+        public Vector3 Coordinate;
+
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            ChangeSceneManager.ChangeScene(Scene, Coordinate);
+            if (collision.gameObject.tag == "Player")
+            {
+                ChangeSceneManager.ChangeScene(Scene, Coordinate);
+            }
         }
     }
+
 }

@@ -3,53 +3,58 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class WallClimb : MonoBehaviour
+namespace Script.Player
 {
-    public float WallEjectPowerX;
-    public float WallEjectPowerY;
-    public float WallDrag;
 
-    private Utility _utility;
-    private Rigidbody2D _rb;
-
-    // Start is called before the first frame update
-    void Start()
+    public class WallClimb : MonoBehaviour
     {
-        _utility = GetComponent<Utility>();
-        _rb = GetComponent<Rigidbody2D>();
-    }
+        public float WallEjectPowerX;
+        public float WallEjectPowerY;
+        public float WallDrag;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (_rb.velocity.y < 0 && !_utility.IsGrounded() && _utility.IsWall())
+        private Utility _utility;
+        private Rigidbody2D _rb;
+
+        // Start is called before the first frame update
+        void Start()
         {
-            _rb.drag = WallDrag;
+            _utility = GetComponent<Utility>();
+            _rb = GetComponent<Rigidbody2D>();
         }
-        else
-        {
-            _rb.drag = 0;
-        }
-    }
 
-    public void WallJumpInput(InputAction.CallbackContext context)
-    {
-        if (context.performed)
+        // Update is called once per frame
+        void Update()
         {
-            if (_utility.IsWall() && !_utility.IsGrounded())
+            if (_rb.velocity.y < 0 && !_utility.IsGrounded() && _utility.IsWall())
             {
-                _utility.CanMove = false;
-                _utility.CanAttack = false;
-                _rb.velocity = new Vector2(WallEjectPowerX * _utility.DirectionModifier() * -1, WallEjectPowerY);
-                Invoke("stopWallEject", 0.2f);
+                _rb.drag = WallDrag;
+            }
+            else
+            {
+                _rb.drag = 0;
             }
         }
+
+        public void WallJumpInput(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                if (_utility.IsWall() && !_utility.IsGrounded())
+                {
+                    _utility.CanMove = false;
+                    _utility.CanAttack = false;
+                    _rb.velocity = new Vector2(WallEjectPowerX * _utility.DirectionModifier() * -1, WallEjectPowerY);
+                    Invoke("stopWallEject", 0.2f);
+                }
+            }
+        }
+
+        private void stopWallEject()
+        {
+            _rb.velocity = new Vector2(0, _rb.velocity.y);
+            _utility.CanMove = true;
+            _utility.CanAttack = true;
+        }
     }
 
-    private void stopWallEject()
-    {
-        _rb.velocity = new Vector2(0, _rb.velocity.y);
-        _utility.CanMove = true;
-        _utility.CanAttack = true;
-    }
 }

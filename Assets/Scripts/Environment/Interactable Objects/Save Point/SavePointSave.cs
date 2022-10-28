@@ -1,15 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
-public class SavePointSave : MonoBehaviour
+namespace Script.Environment.InteractableObject
 {
-    public void Save(object param)
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using UnityEngine.SceneManagement;
+    public class SavePointSave : MonoBehaviour
     {
-        Dictionary<string, object> saveData = (Dictionary<string, object>)param;
+        public void Save(object param)
+        {
+            Dictionary<string, object> saveData = (Dictionary<string, object>)param;
 
-        saveData.Add("Scene", SceneManager.GetActiveScene().name);
-        saveData.Add("Position", new Vector3Json(transform.position));
+            saveData.Add("Scene", SceneManager.GetActiveScene().name);
+            saveData.Add("Position", new Vector3Json(transform.position));
+        }
     }
+
 }

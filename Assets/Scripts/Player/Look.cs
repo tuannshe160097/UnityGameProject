@@ -1,47 +1,51 @@
+using Script.Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Look : MonoBehaviour
+namespace Script.Player
 {
-    private CinemachineSwitcher _switcher;
-    [SerializeField]
-    private GameObject _cinemachineManager;
-    // Start is called before the first frame update
-    void Start()
+    public class Look : MonoBehaviour
     {
-        _switcher = _cinemachineManager.GetComponent<CinemachineSwitcher>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-    public void LookUpInput(InputAction.CallbackContext context)
-    {
-
-        if (context.performed)
+        private CinemachineSwitcher _switcher;
+        [SerializeField]
+        private GameObject _cinemachineManager;
+        // Start is called before the first frame update
+        void Start()
         {
-            _switcher.SwitchUpCameraPriority();
+            _switcher = _cinemachineManager.GetComponent<CinemachineSwitcher>();
         }
-        if (context.canceled)
-        {
-            _switcher.SwitchMainCameraPriority();
-        }
-    }
 
-    public void LookDownInput(InputAction.CallbackContext context)
-    {
-
-        if (context.performed)
+        // Update is called once per frame
+        void Update()
         {
-            _switcher.SwitchDownCameraPriority();
         }
-        if (context.canceled)
+
+        public void LookUpInput(InputAction.CallbackContext context)
         {
-            _switcher.SwitchMainCameraPriority();
+
+            if (context.performed)
+            {
+                _switcher.SwitchUpCameraPriority();
+            }
+            if (context.canceled)
+            {
+                _switcher.SwitchMainCameraPriority();
+            }
+        }
+
+        public void LookDownInput(InputAction.CallbackContext context)
+        {
+
+            if (context.performed)
+            {
+                _switcher.SwitchDownCameraPriority();
+            }
+            if (context.canceled)
+            {
+                _switcher.SwitchMainCameraPriority();
+            }
         }
     }
 }

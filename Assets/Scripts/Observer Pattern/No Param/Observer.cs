@@ -1,19 +1,24 @@
 using UnityEngine;
 using UnityEngine.Events;
-public class Observer : MonoBehaviour
+
+namespace Script.ObserverPattern
 {
-    public Subject gameEvent;
-    public UnityEvent eventDelegate;
-    void OnEnable()
+
+    public class Observer : MonoBehaviour
     {
-        gameEvent.AddObserver(this);
-    }
-    void OnDisable()
-    {
-        gameEvent.RemoveObserver(this);
-    }
-    public void OnEventTriggered()
-    {
-        eventDelegate.Invoke();
+        public Subject gameEvent;
+        public UnityEvent eventDelegate;
+        void OnEnable()
+        {
+            gameEvent.AddObserver(this);
+        }
+        void OnDisable()
+        {
+            gameEvent.RemoveObserver(this);
+        }
+        public void OnEventTriggered()
+        {
+            eventDelegate.Invoke();
+        }
     }
 }

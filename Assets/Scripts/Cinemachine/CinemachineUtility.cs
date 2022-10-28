@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class CinemachineUtility : MonoBehaviour
+namespace Script.Cinemachine
 {
-    public CinemachineVirtualCamera VirtualMainCamera;
-    public CinemachineVirtualCamera VirtualUpCamera;
-    public CinemachineVirtualCamera VirtualDownCamera;
+    public class CinemachineUtility : MonoBehaviour
+    {
+        public CinemachineVirtualCamera VirtualMainCamera;
+        public CinemachineVirtualCamera VirtualUpCamera;
+        public CinemachineVirtualCamera VirtualDownCamera;
+    }
 }

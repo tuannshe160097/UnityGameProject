@@ -1,32 +1,38 @@
+using Script.Player;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-abstract public class InteractableObject : MonoBehaviour
+namespace Script.Environment.InteractableObject
 {
-    private Interact _playerInteract;
 
-    protected void Start()
+    abstract public class InteractableObject : MonoBehaviour
     {
-        _playerInteract = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Interact>();
-    }
+        private Interact _playerInteract;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
+        protected void Start()
         {
-            _playerInteract.PrepareInteraction(this);
+            _playerInteract = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Interact>();
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            _playerInteract.DisposeInteraction();
+            if (collision.gameObject.tag == "Player")
+            {
+                _playerInteract.PrepareInteraction(this);
+            }
         }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                _playerInteract.DisposeInteraction();
+            }
+        }
+
+        abstract public void Interact();
     }
 
-    abstract public void Interact();
 }

@@ -1,27 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.InputSystem;
-
-public class Interact : MonoBehaviour
+namespace Script.Player
 {
-    private InteractableObject _interactableObject = null;
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using UnityEngine.InputSystem;
+    using Script.Environment.InteractableObject;
 
-    public void InteractInput(InputAction.CallbackContext context)
+    public class Interact : MonoBehaviour
     {
-        if (_interactableObject && context.performed)
+        private InteractableObject _interactableObject = null;
+
+        public void InteractInput(InputAction.CallbackContext context)
         {
-            _interactableObject.Interact();
+            if (_interactableObject && context.performed)
+            {
+                _interactableObject.Interact();
+            }
+        }
+
+        public void PrepareInteraction(InteractableObject interactableObject)
+        {
+            _interactableObject = interactableObject;
+        }
+
+        public void DisposeInteraction()
+        {
+            _interactableObject = null;
         }
     }
 
-    public void PrepareInteraction(InteractableObject interactableObject)
-    {
-        _interactableObject = interactableObject;
-    }
-
-    public void DisposeInteraction()
-    {
-        _interactableObject = null;
-    }
 }

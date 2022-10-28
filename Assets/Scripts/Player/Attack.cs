@@ -1,55 +1,60 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.InputSystem;
-
-public class Attack : MonoBehaviour
+namespace Script.Player
 {
-    private Utility _utility;
-    private Rigidbody2D _rb;
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using UnityEngine.InputSystem;
+    using Script.ObserverPattern;
 
-    [SerializeField]
-    private Subject _onPlayerAttack;
-    [SerializeField]
-    private GameObject _weapon;
-    private Animator _animator;
-
-    // Start is called before the first frame update
-    void Start()
+    public class Attack : MonoBehaviour
     {
-        _utility = GetComponent<Utility>();
-        _rb = GetComponent<Rigidbody2D>();
-        _animator = _weapon.GetComponent<Animator>();
-    }
+        private Utility _utility;
+        private Rigidbody2D _rb;
 
-    // Update is called once per frame
-    void Update()
-    {
+        [SerializeField]
+        private Subject _onPlayerAttack;
+        [SerializeField]
+        private GameObject _weapon;
+        private Animator _animator;
 
-    }
-
-    public void AttackInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        // Start is called before the first frame update
+        void Start()
         {
-            _onPlayerAttack.Trigger();
-            _animator.SetTrigger("Swing");
+            _utility = GetComponent<Utility>();
+            _rb = GetComponent<Rigidbody2D>();
+            _animator = _weapon.GetComponent<Animator>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        public void AttackInput(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                _onPlayerAttack.Trigger();
+                _animator.SetTrigger("Swing");
+            }
+        }
+        public void AttackUpInput(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                _onPlayerAttack.Trigger();
+                _animator.SetTrigger("SwingUp");
+            }
+        }
+        public void AttackDownInput(InputAction.CallbackContext context)
+        {
+            if (context.started && !_utility.IsGrounded())
+            {
+                _onPlayerAttack.Trigger();
+                _animator.SetTrigger("SwingDown");
+            }
         }
     }
-    public void AttackUpInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            _onPlayerAttack.Trigger();
-            _animator.SetTrigger("SwingUp");
-        }
-    }
-    public void AttackDownInput(InputAction.CallbackContext context)
-    {
-        if (context.started && !_utility.IsGrounded())
-        {
-            _onPlayerAttack.Trigger();
-            _animator.SetTrigger("SwingDown");
-        }
-    }
+
 }

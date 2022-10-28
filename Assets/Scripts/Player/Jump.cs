@@ -55,11 +55,4 @@ public class Jump : MonoBehaviour
             _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y * 0.5f);
         }
     }
-
-    public void Save(object param)
-    {
-        Dictionary<string, object> saveData = (Dictionary<string, object>)param;
-        saveData.Add("JumpMax", MaxJumpCounter);
-        saveData.Add("JumpPower", JumpPower);
-    }
 }

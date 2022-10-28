@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,7 +16,10 @@ public class ChangeSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FindObjectOfType<PlayerSave>().Load();
+        PlayerSave save = FindObjectOfType<PlayerSave>();
+        save.CreateSave("0");
+        save.Load();
+
         ChangeScene(_scene, _coordinate);
         SceneManager.sceneLoaded += RepositionPlayer;
     }

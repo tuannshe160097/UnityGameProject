@@ -16,6 +16,7 @@ namespace Script.Environment.InteractableObject
             _playerInteract = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Interact>();
         }
 
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.tag == "Player")
